@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
   <body>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <!--Nav-->
+    <nav class="navbar is-fixed-top is-dark" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <a class="navbar-item">
                 Home
@@ -21,27 +22,43 @@
               </a>
         </div>
     </nav>
-    <div class="columns">
-        <div class="column is-one-fifth" id="movie-post">
-
+    <div class="container">
+      <div class="columns">
+        <div class="column is-one-quarter">
+              <div class="content" id="movie-post">
+                <p>Movie Poster Goes Here</p>
+              </div>          
         </div>
-        <div class="column" id="movie-desc">
-
+        <div class="column is-one-half">
+              <div class="content" id="movie-desc">
+                <p>Movie Description Goes Here</p>
+              </div>
         </div>
-        <div class="column" id="actors-list">
-
-        </div>
+          
+        <div class="column">
+            <div class="content" id="actors-list">
+                  <p>Actors list Goes Here</p>
+            </div>
+        </div>            
     </div>
-      
+      <div class="columns">
+        <div class="column">                
+              <div class="field is-grouped">
+                <div class="control">
+                  <button class="button is-danger" id="love-btn">Get Compatibility</button>
+                  <button class="button is-info" id="reset-btn">Reset</button>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Footer--> 
     <footer class="footer">
         <div class="content has-text-centered">
-        <p>
-            <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is licensed
-            <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
-            is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
-        </p>
+        <p>Project 1: Algo-Rhythms 2020</p>
         </div>
     </footer>
-
+    <script src="./js/app.js"></script>
   </body>
 </html>
