@@ -30,14 +30,35 @@ fetch("https://love-calculator.p.rapidapi.com/getPercentage?fname=John&sname=Ali
     console.error(err);
   })
 
-fetch("http://www.omdbapi.com/?t=star+trek&apikey=716bc5f5")
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    console.log(data)
-  })
-  .catch(err => {
-    console.error(err);
-  })
 
+//OMDB API Code (Bryan)  
+
+var submitButton = document.getElementById("get-movie");
+
+function getMovie () {
+  var movieName = document.getElementById("movie-input").value;
+  var movieYear = document.getElementById("year-input").value;
+  var userName = document.getElementById("name-input").value;
+
+  var baseURL = "http://www.omdbapi.com/?apikey=716bc5f5"
+  var testURL = "http://www.omdbapi.com/?t=star+trek&apikey=716bc5f5" 
+
+  fetch(testURL, {
+    "method" : "GET "
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      wondow.location.pathname = "/results.html"
+      console.log(data)
+    })
+    .catch(err => {
+      console.error(err);
+    })
+
+}
+
+submitButton.addEventListener("click", getMovie)
+
+// END OMDB API Code (Bryan)
