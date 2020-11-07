@@ -43,14 +43,17 @@ function getMovie () {
   var baseURL = "http://www.omdbapi.com/?apikey=716bc5f5"
   var testURL = "http://www.omdbapi.com/?t=star+trek&apikey=716bc5f5" 
 
-  fetch(testURL, {
-    "method" : "GET "
-  })
+  fetch(testURL)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-      wondow.location.pathname = "/results.html"
+      window.location.pathname = "results.html"
+
+      console.log(movieName)
+      console.log(movieYear)
+      console.log(userName)
+
       console.log(data)
     })
     .catch(err => {
