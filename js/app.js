@@ -35,20 +35,23 @@ fetch("https://love-calculator.p.rapidapi.com/getPercentage?fname=John&sname=Ali
 
 var submitButton = document.getElementById("get-movie");
 
-function getMovie () {
+function getMovie() {
   var movieName = document.getElementById("movie-input").value;
   var movieYear = document.getElementById("year-input").value;
   var userName = document.getElementById("name-input").value;
 
   var baseURL = "http://www.omdbapi.com/?apikey=716bc5f5"
-  var testURL = "http://www.omdbapi.com/?t=star+trek&apikey=716bc5f5" 
+  var testURL = "http://www.omdbapi.com/?t=star+trek&apikey=716bc5f5"
+
+  //Albert added code to test
+  switchToResults();
 
   fetch(testURL)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-      window.location.pathname = "results.html"
+      //window.location.pathname = "results.html"
 
       console.log(movieName)
       console.log(movieYear)
@@ -65,3 +68,38 @@ function getMovie () {
 submitButton.addEventListener("click", getMovie)
 
 // END OMDB API Code (Bryan)
+
+// BEGIN Albert switchToResults Code
+function switchToResults() {
+  var resultContainerText = '<div class="results-container">\
+  <div class="columns">\
+    <div class="column is-one-quarter">\
+          <div class="content" id="movie-post">\
+            <p>Movie Poster Goes Here</p>\
+          </div>\
+    </div>\
+    <div class="column is-one-half">\
+          <div class="content" id="movie-desc">\
+            <p>Movie Description Goes Here</p>\
+          </div>\
+    </div>\
+    <div class="column">\
+        <div class="content" id="actors-list">\
+              <p>Actors list Goes Here</p>\
+        </div>\
+    </div>\
+</div>\
+  <div class="columns">\
+    <div class="column">\
+          <div class="field is-grouped">\
+            <div class="control">\
+              <button class="button is-danger" id="love-btn">Get Compatibility</button>\
+              <button class="button is-info" id="reset-btn">Reset</button>\
+            </div>\
+          </div>\
+    </div>\
+  </div>\
+</div>'
+  $(".index-container").remove();
+  $(document.body).append(resultContainerText);
+}
