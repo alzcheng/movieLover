@@ -43,33 +43,30 @@ function getMovie() {
   var baseURL = "http://www.omdbapi.com/?apikey=716bc5f5"
   var testURL = "http://www.omdbapi.com/?t=star+trek&apikey=716bc5f5"
 
+  var requestURL = baseURL + "&t=" + movieName + "&y=" + movieYear 
+
   //Albert added code to test
   switchToResults();
 
-  fetch(testURL)
+  fetch(requestURL)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
 
-      var actors = data.Actors;
-      var poster = data.Poster;
-      var title = data.Title;
-      var plot = data.Plot;
+      var actors = data.Actors.split(", ");
+      $("#movie-post").append(`<h1>${data.Title}</h1>`)
+      $("#movie-post").append(`<img src=${data.Poster}>`)
+      $("#movie-desc").text(data.Plot)
+      
+      
+      for (i=0; i<actors.length; i++) {
+        $("#actors-list").append(`<li>${actors[i]}</li>`)
+      }
 
-      $("#movie-post").append(`<img src=${poster}>`)
-      $("#movie-desc").text(plot)
-      $("#actors-list").append(`<li>${actors}</li>`)
-
-
-      console.log (actors)
-      console.log(poster)
-      console.log(title)
-
-
-      console.log(movieName)
-      console.log(movieYear)
-      console.log(userName)
+      // console.log(movieName)
+      // console.log(movieYear)
+      // console.log(userName)
 
       console.log(data)
     })
