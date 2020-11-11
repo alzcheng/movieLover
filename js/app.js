@@ -51,7 +51,21 @@ function getMovie() {
       return response.json();
     })
     .then(function (data) {
-      //window.location.pathname = "results.html"
+
+      var actors = data.Actors;
+      var poster = data.Poster;
+      var title = data.Title;
+      var plot = data.Plot;
+
+      $("#movie-post").append(`<img src=${poster}>`)
+      $("#movie-desc").text(plot)
+      $("#actors-list").append(`<li>${actors}</li>`)
+
+
+      console.log (actors)
+      console.log(poster)
+      console.log(title)
+
 
       console.log(movieName)
       console.log(movieYear)
@@ -75,17 +89,15 @@ function switchToResults() {
   <div class="columns">\
     <div class="column is-one-quarter">\
           <div class="content" id="movie-post">\
-            <p>Movie Poster Goes Here</p>\
           </div>\
     </div>\
     <div class="column is-one-half">\
           <div class="content" id="movie-desc">\
-            <p>Movie Description Goes Here</p>\
           </div>\
     </div>\
     <div class="column">\
-        <div class="content" id="actors-list">\
-              <p>Actors list Goes Here</p>\
+        <div class="content" >\
+              <ul id="actors-list"></ul>\
         </div>\
     </div>\
 </div>\
