@@ -11,31 +11,6 @@ var requestOptions = {
 //Take out the data for Actors and call on love calculator on each Actor and compare to name
 //Output actor name and percentage
 
-function getCompatability () {
-  var loveInterest = actors.value
-  var loveURL = 'https://love-calculator.p.rapidapi.com/getPercentage?fname='+userName+'&sname=Alice'
-  
-
-  fetch( loveURL, {
-    "method": "GET",
-    "headers": {
-      "x-rapidapi-key": "72c1a1d3c8msh9e36717d571537fp101167jsn0ba82bbeba67",
-      "x-rapidapi-host": "love-calculator.p.rapidapi.com"
-    }
-  })
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      console.log(data)
-    })
-    .catch(err => {
-      console.error(err);
-    })
-
-}
-
-
 
 
 //OMDB API Code (Bryan)  
@@ -49,11 +24,12 @@ function getMovie() {
 
   var baseURL = "http://www.omdbapi.com/?apikey=716bc5f5"
   var testURL = "http://www.omdbapi.com/?t=star+trek&apikey=716bc5f5"
+  var userURL = 'http://www.omdbapi.com/?t='+movieName+'&y='+movieYear+'&apikey=716bc5f5'
 
   //Albert added code to test
-  // switchToResults();
+  switchToResults();
 
-  fetch(testURL)
+  fetch(userURL)
     .then(function (response) {
       return response.json();
     })
@@ -124,3 +100,37 @@ function switchToResults() {
   $(".index-container").remove();
   $(document.body).append(resultContainerText);
 }
+
+// love compatability kieran
+
+var loveBtn = document.querySelector("#love-btn")
+
+function getCompatability () {
+  // var loveInterest = document.querySelector("actors-list").value;
+  var loveURL = 'https://love-calculator.p.rapidapi.com/getPercentage?fname=John&sname=Alice"';
+
+  // var loveURL = 'https://love-calculator.p.rapidapi.com/getPercentage?fname='+userName+'&sname=' + loveInterest;
+  
+
+  fetch( loveURL, {
+    "method": "GET",
+    "headers": {
+      "x-rapidapi-key": "72c1a1d3c8msh9e36717d571537fp101167jsn0ba82bbeba67",
+      "x-rapidapi-host": "love-calculator.p.rapidapi.com"
+    }
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data)
+    })
+    .catch(err => {
+      console.error(err);
+    })
+
+}
+$(document.body).on("click", "love-btn", function() {
+  console.log("Something")
+});
+// loveBtn.addEventListener("click", getCompatability)
