@@ -14,3 +14,11 @@
 width: 50%;
 }
 
+.navbar{
+    background-color: pink; 
+}
+
+.navbar-item{
+    color: white; 
+    font-weight: bold; 
+} 

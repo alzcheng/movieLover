@@ -26,33 +26,31 @@ function getMovie() {
   var testURL = "http://www.omdbapi.com/?t=star+trek&apikey=716bc5f5"
   var userURL = 'http://www.omdbapi.com/?t='+movieName+'&y='+movieYear+'&apikey=716bc5f5'
 
+  var requestURL = baseURL + "&t=" + movieName + "&y=" + movieYear 
+
   //Albert added code to test
   switchToResults();
 
-  fetch(userURL)
+  fetch(requestURL)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
 
-      var actors = data.Actors;
-      var poster = data.Poster;
-      var title = data.Title;
-      var plot = data.Plot;
+      var actors = data.Actors.split(", ");
+      $("#movie-title").text(`${data.Title}`)
+      $("#movie-post").append(`<img src=${data.Poster}>`)
+      $("#movie-desc").text(data.Plot)
+      
+      
+      for (i=0; i<actors.length; i++) {
+        $("#actors-list").append(`<li>${actors[i]}</li>`)
+      }
 
-      $("#movie-post").append(`<img src=${poster}>`)
-      $("#movie-desc").text(plot)
-      $("#actors-list").append(`<li>${actors}</li>`)
+      // console.log(movieName)
+      // console.log(movieYear)
+      // console.log(userName)
 
-
-      console.log (actors)
-      console.log(poster)
-      console.log(title)
-
-
-      console.log(movieName)
-      console.log(movieYear)
-      console.log(userName)
       console.log(data)
 
 
@@ -77,7 +75,9 @@ function switchToResults() {
           </div>\
     </div>\
     <div class="column is-one-half">\
-          <div class="content" id="movie-desc">\
+          <div class="content">\
+          <h1 id="movie-title"></h1>\
+          <p id="movie-desc"></p>\
           </div>\
     </div>\
     <div class="column">\
