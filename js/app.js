@@ -80,7 +80,7 @@ function switchToResults() {
           <p id="movie-desc"></p>\
           </div>\
     </div>\
-    <div class="column">\
+    <div class="column is-one-quarter">\
         <div class="content" >\
               <ul id="actors-list"></ul>\
         </div>\
@@ -99,6 +99,9 @@ function switchToResults() {
 </div>'
   $(".index-container").remove();
   $(document.body).append(resultContainerText);
+  $(document.body).on("click", "love-btn", function() {
+    console.log("Something")
+  });
 }
 
 // love compatability kieran
@@ -130,7 +133,3 @@ function getCompatability () {
     })
 
 }
-$(document.body).on("click", "love-btn", function() {
-  console.log("Something")
-});
-// loveBtn.addEventListener("click", getCompatability)

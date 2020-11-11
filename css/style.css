@@ -1,21 +1,23 @@
-.results-container {
-    margin-top: 100px;
+.collumns {
+    margin-left: 100px;
 }
 
-.footer {
-    position:fixed;
-    left:0px;
-    bottom:0px;
-    width:100%;
-    padding: 24px;
- }
+.index-container {
+    margin-left: 80px;
+}
+
+.results-container {
+    margin-top: 100px;
+    margin-left: 80px;
+}
 
 #year-input{
-width: 50%;
+width: 70%;
 }
 
 .navbar{
-    background-color: pink; 
+    background: rgb(170,1,1);
+    background: linear-gradient(23deg, rgba(170,1,1,1) 0%, rgba(250,98,184,1) 100%); 
 }
 
 .navbar-item{
