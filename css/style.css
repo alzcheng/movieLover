@@ -2,12 +2,15 @@
     margin-top: 100px;
 }
 
-footer {
+.footer {
     position:fixed;
     left:0px;
     bottom:0px;
     width:100%;
+    padding: 24px;
  }
 
-
+#year-input{
+width: 50%;
+}
 
