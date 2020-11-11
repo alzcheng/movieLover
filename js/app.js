@@ -11,24 +11,31 @@ var requestOptions = {
 //Take out the data for Actors and call on love calculator on each Actor and compare to name
 //Output actor name and percentage
 
+function getCompatability () {
+  var loveInterest = actors.value
+  var loveURL = 'https://love-calculator.p.rapidapi.com/getPercentage?fname='+userName+'&sname=Alice'
+  
+
+  fetch( loveURL, {
+    "method": "GET",
+    "headers": {
+      "x-rapidapi-key": "72c1a1d3c8msh9e36717d571537fp101167jsn0ba82bbeba67",
+      "x-rapidapi-host": "love-calculator.p.rapidapi.com"
+    }
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data)
+    })
+    .catch(err => {
+      console.error(err);
+    })
+
+}
 
 
-fetch("https://love-calculator.p.rapidapi.com/getPercentage?fname=John&sname=Alice", {
-  "method": "GET",
-  "headers": {
-    "x-rapidapi-key": "72c1a1d3c8msh9e36717d571537fp101167jsn0ba82bbeba67",
-    "x-rapidapi-host": "love-calculator.p.rapidapi.com"
-  }
-})
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    console.log(data)
-  })
-  .catch(err => {
-    console.error(err);
-  })
 
 
 //OMDB API Code (Bryan)  
@@ -44,20 +51,21 @@ function getMovie() {
   var testURL = "http://www.omdbapi.com/?t=star+trek&apikey=716bc5f5"
 
   //Albert added code to test
-  switchToResults();
+  // switchToResults();
 
   fetch(testURL)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-      //window.location.pathname = "results.html"
+      window.location.pathname = "results.html"
 
       console.log(movieName)
       console.log(movieYear)
       console.log(userName)
-
       console.log(data)
+
+
     })
     .catch(err => {
       console.error(err);
@@ -67,39 +75,68 @@ function getMovie() {
 
 submitButton.addEventListener("click", getMovie)
 
+
 // END OMDB API Code (Bryan)
 
 // BEGIN Albert switchToResults Code
-function switchToResults() {
-  var resultContainerText = '<div class="results-container">\
-  <div class="columns">\
-    <div class="column is-one-quarter">\
-          <div class="content" id="movie-post">\
-            <p>Movie Poster Goes Here</p>\
-          </div>\
-    </div>\
-    <div class="column is-one-half">\
-          <div class="content" id="movie-desc">\
-            <p>Movie Description Goes Here</p>\
-          </div>\
-    </div>\
-    <div class="column">\
-        <div class="content" id="actors-list">\
-              <p>Actors list Goes Here</p>\
-        </div>\
-    </div>\
-</div>\
-  <div class="columns">\
-    <div class="column">\
-          <div class="field is-grouped">\
-            <div class="control">\
-              <button class="button is-danger" id="love-btn">Get Compatibility</button>\
-              <button class="button is-info" id="reset-btn">Reset</button>\
-            </div>\
-          </div>\
-    </div>\
-  </div>\
-</div>'
-  $(".index-container").remove();
-  $(document.body).append(resultContainerText);
+// function switchToResults() {
+//   var resultContainerText = '<div class="results-container">\
+//   <div class="columns">\
+//     <div class="column is-one-quarter">\
+//           <div class="content" id="movie-post">\
+//             <p>Movie Poster Goes Here</p>\
+//           </div>\
+//     </div>\
+//     <div class="column is-one-half">\
+//           <div class="content" id="movie-desc">\
+//             <p>Movie Description Goes Here</p>\
+//           </div>\
+//     </div>\
+//     <div class="column">\
+//         <div class="content" >\
+//               <p id="actors-list">Actors list Goes Here</p>\
+//         </div>\
+//     </div>\
+// </div>\
+//   <div class="columns">\
+//     <div class="column">\
+//           <div class="field is-grouped">\
+//             <div class="control">\
+//               <button class="button is-danger" id="love-btn">Get Compatibility</button>\
+//               <button class="button is-info" id="reset-btn">Reset</button>\
+//             </div>\
+//           </div>\
+//     </div>\
+//   </div>\
+// </div>'
+//   $(".index-container").remove();
+//   $(document.body).append(resultContainerText);
+// }
+
+// kieran
+
+var loveBtn = document.querySelector("#love-btn");
+loveBtn.addEventListener("click", getCompatability)
+
+function getCompatability () {
+  var loveURL = 'https://love-calculator.p.rapidapi.com/getPercentage?fname=John&sname=Alice'
+  
+
+  fetch( loveURL, {
+    "method": "GET",
+    "headers": {
+      "x-rapidapi-key": "72c1a1d3c8msh9e36717d571537fp101167jsn0ba82bbeba67",
+      "x-rapidapi-host": "love-calculator.p.rapidapi.com"
+    }
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data)
+    })
+    .catch(err => {
+      console.error(err);
+    })
+
 }
