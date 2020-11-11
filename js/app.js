@@ -55,7 +55,7 @@ function getMovie() {
     .then(function (data) {
 
       var actors = data.Actors.split(", ");
-      $("#movie-post").append(`<h1>${data.Title}</h1>`)
+      $("#movie-title").text(`${data.Title}`)
       $("#movie-post").append(`<img src=${data.Poster}>`)
       $("#movie-desc").text(data.Plot)
       
@@ -89,7 +89,9 @@ function switchToResults() {
           </div>\
     </div>\
     <div class="column is-one-half">\
-          <div class="content" id="movie-desc">\
+          <div class="content">\
+          <h1 id="movie-title"></h1>\
+          <p id="movie-desc"></p>\
           </div>\
     </div>\
     <div class="column">\
