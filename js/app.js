@@ -5,6 +5,9 @@ var requestOptions = {
   redirect: 'follow'
 };
 
+localStorage.setItem("actors", "");
+localStorage.setItem("myName", "");
+
 //On clicking on submit button
 //Get data from Name input
 //Get data from Movie and Year input to generate data set from Omidb
@@ -52,10 +55,11 @@ function getMovie() {
   var movieName = document.getElementById("movie-input").value;
   var movieYear = document.getElementById("year-input").value;
   var userName = document.getElementById("name-input").value;
+  localStorage.setItem("myName", userName);
 
   var baseURL = "http://www.omdbapi.com/?apikey=716bc5f5"
   var testURL = "http://www.omdbapi.com/?t=star+trek&apikey=716bc5f5"
-  var userURL = 'http://www.omdbapi.com/?t='+movieName+'&y='+movieYear+'&apikey=716bc5f5'
+  var userURL = 'http://www.omdbapi.com/?t=' + movieName + '&y=' + movieYear + '&apikey=716bc5f5'
 
   var requestURL = baseURL + "&t=" + movieName + "&y=" + movieYear
 
@@ -69,6 +73,7 @@ function getMovie() {
     .then(function (data) {
 
       var actors = data.Actors.split(", ");
+      localStorage.setItem("actors", actors);
       $("#movie-title").text(`${data.Title}`)
       $("#movie-post").append(`<img src=${data.Poster}>`)
       $("#movie-desc").text(data.Plot)
@@ -76,9 +81,6 @@ function getMovie() {
 
       for (i = 0; i < actors.length; i++) {
         $("#actors-list").append(`<li class="actorsFullName">${actors[i]}</li>`);
-
-        //the fetch in the getCompatibility function runs AFTER the getMovie is completed
-        getCompatibility(actors[i].split(" ")[0], userName);
       }
 
       // console.log(movieName)
@@ -131,7 +133,19 @@ function switchToResults() {
 </div>'
   $(".index-container").remove();
   $(document.body).append(resultContainerText);
-  $("#love-btn").on("click", function () {
-    console.log($("#movie-title").text())
-  });
 
+  $("#love-btn").on("click", function () {
+    var actorArray = localStorage.getItem("actors").split(",");
+    var myName = localStorage.getItem("myName");
+
+    // loop through the actorArray to go through and get each of the percentages
+    // then assign those percentages to the different names
+    for (i = 0; i < actorArray.length; i++) {
+      getCompatibility(actorArray[i].split(" ")[0], myName);
+    }
+  })
+
+  $("#reset-btn").on("click", function () {
+    window.location.reload();
+  })
+}
