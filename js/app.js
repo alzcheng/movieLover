@@ -12,6 +12,37 @@ var requestOptions = {
 //Output actor name and percentage
 
 
+// Appends the compatibility percentage to the actors' names
+function getCompatibility(fname, sname) {
+
+  fetch("https://love-calculator.p.rapidapi.com/getPercentage?fname=" + fname + "&sname=" + sname, {
+    "method": "GET",
+    "headers": {
+      "x-rapidapi-key": "72c1a1d3c8msh9e36717d571537fp101167jsn0ba82bbeba67",
+      "x-rapidapi-host": "love-calculator.p.rapidapi.com"
+    }
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      //Loop through the list
+      for (i = 0; i < $(".actorsFullName").length; i++) {
+        var actorName = $(".actorsFullName")[i];
+        //If the first name of the actor is equal to the first name of the dataset
+        //assign the percentages next to the actors' name
+        if (($(actorName).text().split(" ")[0]) === data.fname) {
+          $(actorName).text($(actorName).text() + " - " + data.percentage + "%");
+        };
+      }
+    })
+    .catch(err => {
+      console.error(err);
+    })
+}
+
+//getCompatibility("Eric", "Alice");
+
 
 //OMDB API Code (Bryan)  
 
@@ -26,7 +57,7 @@ function getMovie() {
   var testURL = "http://www.omdbapi.com/?t=star+trek&apikey=716bc5f5"
   var userURL = 'http://www.omdbapi.com/?t='+movieName+'&y='+movieYear+'&apikey=716bc5f5'
 
-  var requestURL = baseURL + "&t=" + movieName + "&y=" + movieYear 
+  var requestURL = baseURL + "&t=" + movieName + "&y=" + movieYear
 
   //Albert added code to test
   switchToResults();
@@ -41,16 +72,18 @@ function getMovie() {
       $("#movie-title").text(`${data.Title}`)
       $("#movie-post").append(`<img src=${data.Poster}>`)
       $("#movie-desc").text(data.Plot)
-      
-      
-      for (i=0; i<actors.length; i++) {
-        $("#actors-list").append(`<li>${actors[i]}</li>`)
+      console.log(actors);
+
+      for (i = 0; i < actors.length; i++) {
+        $("#actors-list").append(`<li class="actorsFullName">${actors[i]}</li>`);
+
+        //the fetch in the getCompatibility function runs AFTER the getMovie is completed
+        getCompatibility(actors[i].split(" ")[0], userName);
       }
 
       // console.log(movieName)
       // console.log(movieYear)
       // console.log(userName)
-
       console.log(data)
 
 
@@ -58,7 +91,6 @@ function getMovie() {
     .catch(err => {
       console.error(err);
     })
-
 }
 
 submitButton.addEventListener("click", getMovie)
@@ -99,37 +131,7 @@ function switchToResults() {
 </div>'
   $(".index-container").remove();
   $(document.body).append(resultContainerText);
-  $(document.body).on("click", "love-btn", function() {
-    console.log("Something")
+  $("#love-btn").on("click", function () {
+    console.log($("#movie-title").text())
   });
-}
 
-// love compatability kieran
-
-var loveBtn = document.querySelector("#love-btn")
-
-function getCompatability () {
-  // var loveInterest = document.querySelector("actors-list").value;
-  var loveURL = 'https://love-calculator.p.rapidapi.com/getPercentage?fname=John&sname=Alice"';
-
-  // var loveURL = 'https://love-calculator.p.rapidapi.com/getPercentage?fname='+userName+'&sname=' + loveInterest;
-  
-
-  fetch( loveURL, {
-    "method": "GET",
-    "headers": {
-      "x-rapidapi-key": "72c1a1d3c8msh9e36717d571537fp101167jsn0ba82bbeba67",
-      "x-rapidapi-host": "love-calculator.p.rapidapi.com"
-    }
-  })
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      console.log(data)
-    })
-    .catch(err => {
-      console.error(err);
-    })
-
-}
