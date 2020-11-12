@@ -36,6 +36,9 @@ function getCompatibility(fname, sname) {
         //assign the percentages next to the actors' name
         if (($(actorName).text().split(" ")[0]) === data.fname) {
           $(actorName).text($(actorName).text() + " - " + data.percentage + "%");
+          var progressBar = document.createElement("div");
+          progressBar.innerHTML ='<progress class="progress is-danger" value="'+data.percentage +'" max="100">'+data.percentage+'%</progress>';
+          $(actorName).after(progressBar);
         };
       }
     })
