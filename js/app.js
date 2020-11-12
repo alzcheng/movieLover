@@ -113,4 +113,5 @@ function switchToResults() {
 </div>'
   $(".index-container").remove();
   $(document.body).append(resultContainerText);
+
 }
