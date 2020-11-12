@@ -5,6 +5,9 @@ var requestOptions = {
   redirect: 'follow'
 };
 
+localStorage.setItem("actors", "");
+localStorage.setItem("myName", "");
+
 //On clicking on submit button
 //Get data from Name input
 //Get data from Movie and Year input to generate data set from Omidb
@@ -52,6 +55,7 @@ function getMovie() {
   var movieName = document.getElementById("movie-input").value;
   var movieYear = document.getElementById("year-input").value;
   var userName = document.getElementById("name-input").value;
+  localStorage.setItem("myName", userName);
 
   var baseURL = "http://www.omdbapi.com/?apikey=716bc5f5"
   var testURL = "http://www.omdbapi.com/?t=star+trek&apikey=716bc5f5"
@@ -131,10 +135,17 @@ function switchToResults() {
   $(document.body).append(resultContainerText);
 
   $("#love-btn").on("click", function () {
-    console.log($("#movie-title").text())
+    var actorArray = localStorage.getItem("actors").split(",");
+    var myName = localStorage.getItem("myName");
+
+    // loop through the actorArray to go through and get each of the percentages
+    // then assign those percentages to the different names
+    for (i = 0; i < actorArray.length; i++) {
+      getCompatibility(actorArray[i].split(" ")[0], myName);
+    }
   })
 
-  $("#reset-btn").on("click", function() {
+  $("#reset-btn").on("click", function () {
     window.location.reload();
   })
 }
