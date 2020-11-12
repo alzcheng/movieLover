@@ -69,6 +69,7 @@ function getMovie() {
     .then(function (data) {
 
       var actors = data.Actors.split(", ");
+      localStorage.setItem("actors", actors);
       $("#movie-title").text(`${data.Title}`)
       $("#movie-post").append(`<img src=${data.Poster}>`)
       $("#movie-desc").text(data.Plot)
@@ -76,9 +77,6 @@ function getMovie() {
 
       for (i = 0; i < actors.length; i++) {
         $("#actors-list").append(`<li class="actorsFullName">${actors[i]}</li>`);
-
-        //the fetch in the getCompatibility function runs AFTER the getMovie is completed
-        getCompatibility(actors[i].split(" ")[0], userName);
       }
 
       // console.log(movieName)
@@ -131,7 +129,12 @@ function switchToResults() {
 </div>'
   $(".index-container").remove();
   $(document.body).append(resultContainerText);
+
   $("#love-btn").on("click", function () {
     console.log($("#movie-title").text())
+  })
+
+  $("#reset-btn").on("click", function() {
+    window.location.reload();
   })
 }
