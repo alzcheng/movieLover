@@ -11,6 +11,7 @@ var requestOptions = {
 //Take out the data for Actors and call on love calculator on each Actor and compare to name
 //Output actor name and percentage
 
+
 // Appends the compatibility percentage to the actors' names
 function getCompatibility(fname, sname) {
 
@@ -54,6 +55,7 @@ function getMovie() {
 
   var baseURL = "http://www.omdbapi.com/?apikey=716bc5f5"
   var testURL = "http://www.omdbapi.com/?t=star+trek&apikey=716bc5f5"
+  var userURL = 'http://www.omdbapi.com/?t='+movieName+'&y='+movieYear+'&apikey=716bc5f5'
 
   var requestURL = baseURL + "&t=" + movieName + "&y=" + movieYear
 
@@ -83,6 +85,8 @@ function getMovie() {
       // console.log(movieYear)
       // console.log(userName)
       console.log(data)
+
+
     })
     .catch(err => {
       console.error(err);
@@ -90,6 +94,7 @@ function getMovie() {
 }
 
 submitButton.addEventListener("click", getMovie)
+
 
 // END OMDB API Code (Bryan)
 
@@ -107,7 +112,7 @@ function switchToResults() {
           <p id="movie-desc"></p>\
           </div>\
     </div>\
-    <div class="column">\
+    <div class="column is-one-quarter">\
         <div class="content" >\
               <ul id="actors-list"></ul>\
         </div>\
@@ -130,4 +135,3 @@ function switchToResults() {
     console.log($("#movie-title").text())
   });
 
-}
