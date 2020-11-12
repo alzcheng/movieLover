@@ -76,9 +76,6 @@ function getMovie() {
 
       for (i = 0; i < actors.length; i++) {
         $("#actors-list").append(`<li class="actorsFullName">${actors[i]}</li>`);
-
-        //the fetch in the getCompatibility function runs AFTER the getMovie is completed
-        getCompatibility(actors[i].split(" ")[0], userName);
       }
 
       // console.log(movieName)
@@ -131,11 +128,12 @@ function switchToResults() {
 </div>'
   $(".index-container").remove();
   $(document.body).append(resultContainerText);
-<<<<<<< HEAD
 
-=======
   $("#love-btn").on("click", function () {
     console.log($("#movie-title").text())
   })
->>>>>>> c0868b508c07b9918a3bcac19857ca7c50cc30f4
+
+  $("#reset-btn").on("click", function() {
+    window.location.reload();
+  })
 }
