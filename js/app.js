@@ -69,6 +69,7 @@ function getMovie() {
     .then(function (data) {
 
       var actors = data.Actors.split(", ");
+      localStorage.setItem("actors", actors);
       $("#movie-title").text(`${data.Title}`)
       $("#movie-post").append(`<img src=${data.Poster}>`)
       $("#movie-desc").text(data.Plot)
