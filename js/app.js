@@ -55,7 +55,7 @@ function getMovie() {
 
   var baseURL = "http://www.omdbapi.com/?apikey=716bc5f5"
   var testURL = "http://www.omdbapi.com/?t=star+trek&apikey=716bc5f5"
-  var userURL = 'http://www.omdbapi.com/?t='+movieName+'&y='+movieYear+'&apikey=716bc5f5'
+  var userURL = 'http://www.omdbapi.com/?t=' + movieName + '&y=' + movieYear + '&apikey=716bc5f5'
 
   var requestURL = baseURL + "&t=" + movieName + "&y=" + movieYear
 
@@ -133,5 +133,5 @@ function switchToResults() {
   $(document.body).append(resultContainerText);
   $("#love-btn").on("click", function () {
     console.log($("#movie-title").text())
-  });
-
+  })
+}
