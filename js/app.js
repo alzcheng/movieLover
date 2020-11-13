@@ -90,7 +90,7 @@ function getMovie() {
 
 
   //Validate form is not empty
-  if (movieName === "" || movieYear === ""|| userName === "" ) {
+  if (movieName === "" || userName === "" ) {
     $("#error-msg").show()
     showError();
     return
