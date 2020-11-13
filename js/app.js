@@ -69,7 +69,15 @@ function getCompatibility(fname, sname) {
     })
 }
 
-//OMDB API Code (Bryan)  
+//OMDB API Code (Bryan)
+
+function showError () {
+  $("#error-msg").removeAttr("hidden"); 
+}
+
+$("#close-btn").on("click", function () {
+  $("#error-msg").hide();
+})
 
 var submitButton = document.getElementById("get-movie");
 
@@ -79,6 +87,15 @@ function getMovie() {
   var movieName = document.getElementById("movie-input").value;
   var movieYear = document.getElementById("year-input").value;
   var userName = document.getElementById("name-input").value;
+
+
+  //Validate form is not empty
+  if (movieName === "" || userName === "" ) {
+    $("#error-msg").show()
+    showError();
+    return
+  }
+
   //store max compatibilty 
   var maxComp = JSON.parse(localStorage.getItem("maxComp"))
 
@@ -92,13 +109,15 @@ function getMovie() {
     maxComp.actor = "";
     maxComp.percentage = "";
     localStorage.setItem("maxComp", JSON.stringify(maxComp));
+
   }
 
   localStorage.setItem("myName", userName);
 
+  //begin API call
   var requestURL = "http://www.omdbapi.com/?apikey=716bc5f5&t=" + movieName + "&y=" + movieYear
 
-  //Change the DOM to render results
+  //Changes the DOM to render results
   switchToResults();
 
   fetch(requestURL)
@@ -106,6 +125,12 @@ function getMovie() {
       return response.json();
     })
     .then(function (data) {
+      console.log(data)
+
+      if(data.Response =="False") {
+        $("#error-msg").show()
+        return
+      }
 
       var actors = data.Actors.split(", ");
       localStorage.setItem("actors", actors);
@@ -120,7 +145,7 @@ function getMovie() {
 
     })
     .catch(err => {
-      console.error(err);
+      console.log(err + "error!!!")
     })
 }
 
@@ -132,28 +157,36 @@ function switchToResults() {
   var resultContainerText = '<div class="results-container">\
   <div class="columns">\
     <div class="column is-one-quarter">\
-          <div class="content" id="movie-post">\
-          </div>\
+      <div class="content" id="movie-post"></div>\
     </div>\
     <div class="column is-one-half">\
-          <div class="content">\
-          <h1 id="movie-title"></h1>\
-          <p id="movie-desc"></p>\
-          </div>\
+      <div class="content">\
+        <h1 id="movie-title"></h1>\
+        <p id="movie-desc"></p>\
+      </div>\
     </div>\
     <div class="column is-one-quarter">\
-        <div class="content" >\
+      <div class="content" >\
         <h3 id="movie-title">Actors</h3>\
-              <ul id="actors-list"></ul>\
-        </div>\
-        <div class="btns">\
+        <ul id="actors-list"></ul>\
+      </div>\
+      <div class="btns">\
         <div class="field is-grouped">\
-            <div class="control">\
-              <button class="button is-danger" id="love-btn">Get Compatibility</button>\
-              <button class="button is-info" id="reset-btn">Reset</button>\
-            </div>\
+          <div class="control">\
+            <button class="button is-danger" id="love-btn">Get Compatibility</button>\
+            <button class="button is-info" id="reset-btn">Reset</button>\
           </div>\
+        </div>\
+      </div>\
+    </div>\
+    <div hidden class="section" id="error-msg">\
+      <div class="level">\
+        <div class="level-right">\
+          <div class="notification is-danger">\
+            <button class="delete" id="close-btn"></button>\
+            Oops! Something went wrong. Click the reset button.\
           </div>\
+        </div>\
     </div>\
 </div>\
   </div>'
