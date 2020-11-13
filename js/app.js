@@ -61,6 +61,12 @@ function getCompatibility(fname, sname) {
           progressBar.setAttribute("class", "progress-bar");
           progressBar.innerHTML = '<progress class="progress is-danger" value="' + data.percentage + '" max="100">' + data.percentage + '%</progress>';
           $(actorName).after(progressBar);
+          $("#matches").text("Potential Victims")
+          var maxHistory = localStorage.getItem("maxComp");
+          var match = JSON.parse(maxHistory).actor;
+          var matchPercent = JSON.parse(maxHistory).percentage;
+          $("#history").text(match + ' with ' +matchPercent + '% love compatability');
+          
         };
       }
     })
@@ -179,6 +185,15 @@ function switchToResults() {
         </div>\
       </div>\
     </div>\
+</div>\
+<div class="columns">\
+<div class="column">\
+  <div class="content">\
+    <h3 id="matches"></h3>\
+    <div id="history">\
+    </div>\
+  </div>\
+</div>\
     <div hidden class="section" id="error-msg">\
       <div class="level">\
         <div class="level-right">\
