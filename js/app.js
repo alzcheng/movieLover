@@ -36,6 +36,10 @@ function getCompatibility(fname, sname) {
         //assign the percentages next to the actors' name
         if (($(actorName).text().split(" ")[0]) === data.fname) {
           $(actorName).text($(actorName).text() + " - " + data.percentage + "%");
+          var progressBar = document.createElement("div");
+          progressBar.setAttribute("class", "progress-bar");
+          progressBar.innerHTML ='<progress class="progress is-danger" value="'+data.percentage +'" max="100">'+data.percentage+'%</progress>';
+          $(actorName).after(progressBar);
         };
       }
     })
@@ -116,21 +120,20 @@ function switchToResults() {
     </div>\
     <div class="column is-one-quarter">\
         <div class="content" >\
+        <h3 id="movie-title">Actors</h3>\
               <ul id="actors-list"></ul>\
         </div>\
-    </div>\
-</div>\
-  <div class="columns">\
-    <div class="column">\
-          <div class="field is-grouped">\
+        <div class="btns">\
+        <div class="field is-grouped">\
             <div class="control">\
               <button class="button is-danger" id="love-btn">Get Compatibility</button>\
               <button class="button is-info" id="reset-btn">Reset</button>\
             </div>\
           </div>\
+          </div>\
     </div>\
-  </div>\
-</div>'
+</div>\
+  </div>'
   $(".index-container").remove();
   $(document.body).append(resultContainerText);
 
