@@ -48,7 +48,15 @@ function getCompatibility(fname, sname) {
     })
 }
 
-//OMDB API Code (Bryan)  
+//OMDB API Code (Bryan)
+
+function showError () {
+  $("#error-msg").removeAttr("hidden"); 
+}
+
+$("#close-btn").on("click", function () {
+  $("#error-msg").hide();
+})
 
 var submitButton = document.getElementById("get-movie");
 
@@ -58,6 +66,14 @@ function getMovie() {
   var movieName = document.getElementById("movie-input").value;
   var movieYear = document.getElementById("year-input").value;
   var userName = document.getElementById("name-input").value;
+
+  //Validate form is not empty
+  if (movieName === "" || movieYear === "" || userName === "" ) {
+    $("#error-msg").show()
+    showError();
+    return
+  }
+
   localStorage.setItem("myName", userName);
 
   var requestURL = "http://www.omdbapi.com/?apikey=716bc5f5&t=" + movieName + "&y=" + movieYear
