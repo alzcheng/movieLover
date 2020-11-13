@@ -69,14 +69,13 @@ function getCompatibility(fname, sname) {
     })
 }
 
-//getCompatibility("Eric", "Alice");
-
-
 //OMDB API Code (Bryan)  
 
 var submitButton = document.getElementById("get-movie");
 
 function getMovie() {
+
+  //Get form data and store username in local sorage
   var movieName = document.getElementById("movie-input").value;
   var movieYear = document.getElementById("year-input").value;
   var userName = document.getElementById("name-input").value;
@@ -97,13 +96,9 @@ function getMovie() {
 
   localStorage.setItem("myName", userName);
 
-  var baseURL = "http://www.omdbapi.com/?apikey=716bc5f5"
-  var testURL = "http://www.omdbapi.com/?t=star+trek&apikey=716bc5f5"
-  var userURL = 'http://www.omdbapi.com/?t=' + movieName + '&y=' + movieYear + '&apikey=716bc5f5'
+  var requestURL = "http://www.omdbapi.com/?apikey=716bc5f5&t=" + movieName + "&y=" + movieYear
 
-  var requestURL = baseURL + "&t=" + movieName + "&y=" + movieYear
-
-  //Albert added code to test
+  //Change the DOM to render results
   switchToResults();
 
   fetch(requestURL)
@@ -123,12 +118,6 @@ function getMovie() {
         $("#actors-list").append(`<li class="actorsFullName">${actors[i]}</li>`);
       }
 
-      // console.log(movieName)
-      // console.log(movieYear)
-      // console.log(userName)
-      console.log(data)
-
-
     })
     .catch(err => {
       console.error(err);
@@ -136,8 +125,6 @@ function getMovie() {
 }
 
 submitButton.addEventListener("click", getMovie)
-
-
 // END OMDB API Code (Bryan)
 
 // BEGIN Albert switchToResults Code
@@ -184,6 +171,7 @@ function switchToResults() {
     }
   })
 
+  //resets the window by refreshing the page
   $("#reset-btn").on("click", function () {
     window.location.reload();
   })
