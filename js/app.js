@@ -69,7 +69,15 @@ function getCompatibility(fname, sname) {
     })
 }
 
-//OMDB API Code (Bryan)  
+//OMDB API Code (Bryan)
+
+function showError () {
+  $("#error-msg").removeAttr("hidden"); 
+}
+
+$("#close-btn").on("click", function () {
+  $("#error-msg").hide();
+})
 
 var submitButton = document.getElementById("get-movie");
 
@@ -79,6 +87,15 @@ function getMovie() {
   var movieName = document.getElementById("movie-input").value;
   var movieYear = document.getElementById("year-input").value;
   var userName = document.getElementById("name-input").value;
+
+
+  //Validate form is not empty
+  if (movieName === "" || movieYear === "" || userName === "" ) {
+    $("#error-msg").show()
+    showError();
+    return
+  }
+
   //store max compatibilty 
   var maxComp = JSON.parse(localStorage.getItem("maxComp"))
 
@@ -92,6 +109,7 @@ function getMovie() {
     maxComp.actor = "";
     maxComp.percentage = "";
     localStorage.setItem("maxComp", JSON.stringify(maxComp));
+
   }
 
   localStorage.setItem("myName", userName);
