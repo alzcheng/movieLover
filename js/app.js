@@ -90,7 +90,7 @@ function getMovie() {
 
 
   //Validate form is not empty
-  if (movieName === "" || movieYear === ""|| userName === "" ) {
+  if (movieName === "" || userName === "" ) {
     $("#error-msg").show()
     showError();
     return
@@ -157,37 +157,36 @@ function switchToResults() {
   var resultContainerText = '<div class="results-container">\
   <div class="columns">\
     <div class="column is-one-quarter">\
-    <div hidden class="section" id="error-msg">\
-        <div class="level">\
-          <div class="level-right">\
-            <div class="notification is-danger">\
-              <button class="delete" id="close-btn"></button>\
-              Oops! Something went wrong. Click the reset button.\
-            </div>\
-          </div>\
-      </div>\
-          <div class="content" id="movie-post">\
-          </div>\
+      <div class="content" id="movie-post"></div>\
     </div>\
     <div class="column is-one-half">\
-          <div class="content">\
-          <h1 id="movie-title"></h1>\
-          <p id="movie-desc"></p>\
-          </div>\
+      <div class="content">\
+        <h1 id="movie-title"></h1>\
+        <p id="movie-desc"></p>\
+      </div>\
     </div>\
     <div class="column is-one-quarter">\
-        <div class="content" >\
+      <div class="content" >\
         <h3 id="movie-title">Actors</h3>\
-              <ul id="actors-list"></ul>\
-        </div>\
-        <div class="btns">\
+        <ul id="actors-list"></ul>\
+      </div>\
+      <div class="btns">\
         <div class="field is-grouped">\
-            <div class="control">\
-              <button class="button is-danger" id="love-btn">Get Compatibility</button>\
-              <button class="button is-info" id="reset-btn">Reset</button>\
-            </div>\
+          <div class="control">\
+            <button class="button is-danger" id="love-btn">Get Compatibility</button>\
+            <button class="button is-info" id="reset-btn">Reset</button>\
           </div>\
+        </div>\
+      </div>\
+    </div>\
+    <div hidden class="section" id="error-msg">\
+      <div class="level">\
+        <div class="level-right">\
+          <div class="notification is-danger">\
+            <button class="delete" id="close-btn"></button>\
+            Oops! Something went wrong. Click the reset button.\
           </div>\
+        </div>\
     </div>\
 </div>\
   </div>'
