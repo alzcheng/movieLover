@@ -90,7 +90,7 @@ function getMovie() {
 
 
   //Validate form is not empty
-  if (movieName === "" || movieYear === "" || userName === "" ) {
+  if (movieName === "" || movieYear === ""|| userName === "" ) {
     $("#error-msg").show()
     showError();
     return
@@ -114,9 +114,10 @@ function getMovie() {
 
   localStorage.setItem("myName", userName);
 
+  //begin API call
   var requestURL = "http://www.omdbapi.com/?apikey=716bc5f5&t=" + movieName + "&y=" + movieYear
 
-  //Change the DOM to render results
+  //Changes the DOM to render results
   switchToResults();
 
   fetch(requestURL)
@@ -124,6 +125,12 @@ function getMovie() {
       return response.json();
     })
     .then(function (data) {
+      console.log(data)
+
+      if(data.Response =="False") {
+        $("#error-msg").show()
+        return
+      }
 
       var actors = data.Actors.split(", ");
       localStorage.setItem("actors", actors);
@@ -138,7 +145,7 @@ function getMovie() {
 
     })
     .catch(err => {
-      console.error(err);
+      console.log(err + "error!!!")
     })
 }
 
@@ -150,6 +157,15 @@ function switchToResults() {
   var resultContainerText = '<div class="results-container">\
   <div class="columns">\
     <div class="column is-one-quarter">\
+    <div hidden class="section" id="error-msg">\
+        <div class="level">\
+          <div class="level-right">\
+            <div class="notification is-danger">\
+              <button class="delete" id="close-btn"></button>\
+              Oops! Something went wrong. Click the reset button.\
+            </div>\
+          </div>\
+      </div>\
           <div class="content" id="movie-post">\
           </div>\
     </div>\
