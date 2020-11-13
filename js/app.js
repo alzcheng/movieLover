@@ -1,5 +1,3 @@
-console.log("Sanity Check, JS is connected!")
-
 var requestOptions = {
   method: 'GET',
   redirect: 'follow'
@@ -61,11 +59,12 @@ function getCompatibility(fname, sname) {
           progressBar.setAttribute("class", "progress-bar");
           progressBar.innerHTML = '<progress class="progress is-danger" value="' + data.percentage + '" max="100">' + data.percentage + '%</progress>';
           $(actorName).after(progressBar);
-          $("#matches").text("Potential Victims")
+          $("#matches").text("Your Best Match!")
+          $("#max").addClass("best-match");
           var maxHistory = localStorage.getItem("maxComp");
           var match = JSON.parse(maxHistory).actor;
           var matchPercent = JSON.parse(maxHistory).percentage;
-          $("#history").text(match + ' with ' +matchPercent + '% love compatability');
+          $("#history").text(match + ' with ' +matchPercent + '% love compatability!');
           
         };
       }
@@ -160,19 +159,34 @@ submitButton.addEventListener("click", getMovie)
 
 // BEGIN Albert switchToResults Code
 function switchToResults() {
-  var resultContainerText = '<div class="results-container">\
+  var resultContainerText = '<nav class="navbar" role="navigation" aria-label="main navigation">\
+  <div class="navbar-brand">\
+    <a class="navbar-item" id="home-btn">\
+      Movie Love Calculator\
+    </a>\
+  </div>\
+</nav>\
+<div class="results-container">\
   <div class="columns">\
+  <div hidden class="section" id="error-msg">\
+      <div class="level">\
+        <div class="level-right">\
+          <div class="notification is-danger">\
+            <button class="delete" id="close-btn"></button>\
+            Oops! Something went wrong. Click the reset button.\
+          </div>\
+        </div>\
+    </div>\
+</div>\
     <div class="column is-one-quarter">\
       <div class="content" id="movie-post"></div>\
     </div>\
-    <div class="column is-one-half">\
+    <div class="column is-half">\
       <div class="content">\
         <h1 id="movie-title"></h1>\
         <p id="movie-desc"></p>\
       </div>\
-    </div>\
-    <div class="column is-one-quarter">\
-      <div class="content" >\
+      <div class="content">\
         <h3 id="movie-title">Actors</h3>\
         <ul id="actors-list"></ul>\
       </div>\
@@ -185,26 +199,15 @@ function switchToResults() {
         </div>\
       </div>\
     </div>\
-</div>\
-<div class="columns">\
 <div class="column">\
-  <div class="content">\
+  <div class="content" id="max">\
     <h3 id="matches"></h3>\
     <div id="history">\
     </div>\
-  </div>\
-</div>\
-    <div hidden class="section" id="error-msg">\
-      <div class="level">\
-        <div class="level-right">\
-          <div class="notification is-danger">\
-            <button class="delete" id="close-btn"></button>\
-            Oops! Something went wrong. Click the reset button.\
-          </div>\
-        </div>\
-    </div>\
+      </div>\
 </div>\
   </div>'
+  $(".hero").remove();
   $(".index-container").remove();
   $(document.body).append(resultContainerText);
 
@@ -221,6 +224,9 @@ function switchToResults() {
 
   //resets the window by refreshing the page
   $("#reset-btn").on("click", function () {
+    window.location.reload();
+  })
+  $("#home-btn").on("click", function () {
     window.location.reload();
   })
 }
