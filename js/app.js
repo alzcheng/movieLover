@@ -37,6 +37,7 @@ function getCompatibility(fname, sname) {
         if (($(actorName).text().split(" ")[0]) === data.fname) {
           $(actorName).text($(actorName).text() + " - " + data.percentage + "%");
           var progressBar = document.createElement("div");
+          progressBar.setAttribute("class", "progress-bar");
           progressBar.innerHTML ='<progress class="progress is-danger" value="'+data.percentage +'" max="100">'+data.percentage+'%</progress>';
           $(actorName).after(progressBar);
         };

@@ -34,4 +34,7 @@ a.navbar-item:hover {
     color:pink;
 }
 
+.progress-bar {
+    padding-top: 12px;
+}
 
