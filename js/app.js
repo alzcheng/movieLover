@@ -65,6 +65,7 @@ function getCompatibility(fname, sname) {
           var match = JSON.parse(maxHistory).actor;
           var matchPercent = JSON.parse(maxHistory).percentage;
           $("#history").text(match + ' with ' +matchPercent + '% love compatability!');
+          $("#love-btn").hide();
           
         };
       }
