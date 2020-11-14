@@ -1,8 +1,3 @@
-var requestOptions = {
-  method: 'GET',
-  redirect: 'follow'
-};
-
 localStorage.setItem("actors", "");
 localStorage.setItem("myName", "");
 // added for initializing max compatibility
@@ -121,7 +116,7 @@ function getMovie() {
   localStorage.setItem("myName", userName);
 
   //begin API call
-  var requestURL = "http://www.omdbapi.com/?apikey=716bc5f5&t=" + movieName + "&y=" + movieYear
+  var requestURL = "https://www.omdbapi.com/?apikey=716bc5f5&t=" + movieName + "&y=" + movieYear
 
   //Changes the DOM to render results
   switchToResults();
