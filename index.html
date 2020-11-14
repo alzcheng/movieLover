@@ -7,24 +7,30 @@
   <title>Project 1: Compatibility</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
   <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Titan+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css">
 </head>
-<!--  this is cool. -->
 
 <body>
-  <nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <a class="navbar-item">
-        Movie Love Calculator
-      </a>
-    </div>
-  </nav>
+    <section class="hero is-medium is-danger">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title">
+              Are You Compatible?
+            </h1>
+            <h2 class="subtitle">
+                With Your Favorite Movie Stars
+            </h2>
+          </div>
+        </div>
+      </section>
   <div class="index-container">
-    <div class="columns">
+    <div class="columns is-mobile is-centered">
       <div class="column is-one-third">
         <section class="section">
           <div class="container">
-            <div class="field is-grouped">
+            <div class="field is-grouped is-centered">
               <div class="control">
                 <input class="input is-danger movieName" id="movie-input" type="text" placeholder="Movie name">
               </div>
@@ -43,6 +49,7 @@
           </div>
         </section>
       </div>
+      
       <div hidden class="section" id="error-msg">
         <div class="level">
           <div class="level-right">
@@ -51,8 +58,9 @@
               Check that you filled out all form fields and try again. 
             </div>
           </div>
+        </div>
       </div>
-      </div>
+
     </div>
   </div>
 
