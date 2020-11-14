@@ -1,8 +1,3 @@
-var requestOptions = {
-  method: 'GET',
-  redirect: 'follow'
-};
-
 localStorage.setItem("actors", "");
 localStorage.setItem("myName", "");
 // added for initializing max compatibility
