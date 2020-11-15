@@ -1,3 +1,5 @@
+/* Initial page banner styles */
+
 .hero {
     background: rgb(170,1,1);
     background: linear-gradient(23deg, rgba(170,1,1,1) 0%, rgba(250,98,184,1) 100%);
@@ -20,21 +22,17 @@
     font-size: 26px;
     line-height: 2.5;
 }
-.results-container {
-    margin-top: 80px;
-    margin-left: 80px;
-    margin-right: 80px;
-}
 
-#year-input{
-width: 70%;
+#year-input {
+    width: 70%;
 }
-
+    
 .submitBtn {
     display: block;
     width: 100%;
 }
-
+    
+/* Results page stylings */
 .navbar{
     background: rgb(170,1,1);
     background: linear-gradient(23deg, rgba(170,1,1,1) 0%, rgba(250,98,184,1) 100%); 
@@ -44,6 +42,13 @@ width: 70%;
     color: white; 
     font-weight: bold; 
 } 
+
+.results-container {
+    margin-top: 80px;
+    margin-left: 80px;
+    margin-right: 80px;
+}
+
 
 li {
     padding-top: 5px;
@@ -72,6 +77,4 @@ a.navbar-item:hover {
     font-family: 'Shrikhand', cursive;
     font-weight: 200;
     color: hsl(348, 100%, 61%);
-
-
 }

@@ -9,23 +9,27 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
   <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
   <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Titan+One&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Titan+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
-    <section class="hero is-medium is-danger">
-        <div class="hero-body">
-          <div class="container">
-            <h1 class="title">
-              Are You Compatible?
-            </h1>
-            <h2 class="subtitle">
-                With Your Favorite Movie Stars
-            </h2>
-          </div>
-        </div>
-      </section>
+
+  <!-- Main banner starts here -->
+  <section class="hero is-medium is-danger">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          Are You Compatible?
+        </h1>
+        <h2 class="subtitle">
+          With Your Favorite Movie Stars
+        </h2>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main form starts here -->
   <div class="index-container">
     <div class="columns is-mobile is-centered">
       <div class="column is-one-third">
@@ -50,13 +54,14 @@
           </div>
         </section>
       </div>
-      
+
+      <!-- Modal button for error handling starts here -->
       <div hidden class="section" id="error-msg">
         <div class="level">
           <div class="level-right">
             <div class="notification is-danger">
               <button class="delete" id="close-btn"></button>
-              Check that you filled out all form fields and try again. 
+              Check that you filled out all form fields and try again.
             </div>
           </div>
         </div>
@@ -64,8 +69,6 @@
 
     </div>
   </div>
-
-
 
   <!-- Javascript starts here -->
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"

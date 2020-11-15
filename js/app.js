@@ -1,23 +1,17 @@
+var submitButton = document.getElementById("get-movie");
+
+//Initialize localStorage items when the app first starts
 localStorage.setItem("actors", "");
 localStorage.setItem("myName", "");
-// added for initializing max compatibility
+// Initializing max compatibility
 if (localStorage.getItem("maxComp") === null) {
   localStorage.setItem("maxComp", JSON.stringify({ myName: "", actor: "", percentage: "" }));
 }
-
-//On clicking on submit button
-//Get data from Name input
-//Get data from Movie and Year input to generate data set from Omidb
-//Take out the data for Actors and call on love calculator on each Actor and compare to name
-//Output actor name and percentage
 
 //Given an actor's full name and percentage, if the percentage is greater than or 
 //equal to the max compatibility percentage, set the actor to maxCompatibilty 
 function checkMaxComp(actorName, percentage) {
   var maxCompability = JSON.parse(localStorage.getItem("maxComp"));
-  console.log(parseFloat(maxCompability.percentage));
-  console.log(parseFloat(percentage));
-  console.log(actorName);
 
   if (parseFloat(maxCompability.percentage) <= parseFloat(percentage) || maxCompability.percentage == "") {
     maxCompability.actor = actorName;
@@ -26,6 +20,7 @@ function checkMaxComp(actorName, percentage) {
   }
 }
 
+// Love Calculator API (Albert)
 // Appends the compatibility percentage to the actors' names
 function getCompatibility(fname, sname) {
 
@@ -47,21 +42,23 @@ function getCompatibility(fname, sname) {
         //If the first name of the actor is equal to the first name of the dataset
         //assign the percentages next to the actors' name
         if (($(actorName).text().split(" ")[0]) === data.fname) {
-          //check max compatbility first before modifying the list
-          checkMaxComp($(actorName).text(), data.percentage);
-          $(actorName).text($(actorName).text() + " - " + data.percentage + "%");
           var progressBar = document.createElement("div");
+          var maxHistory = localStorage.getItem("maxComp");
+          var match = JSON.parse(maxHistory).actor;
+          var matchPercent = JSON.parse(maxHistory).percentage;
+
+          //Check max compatbility first before modifying the list
+          checkMaxComp($(actorName).text(), data.percentage);
+
+          //Modify the actors list with compatibility progress bars (Kieren)
+          $(actorName).text($(actorName).text() + " - " + data.percentage + "%");
           progressBar.setAttribute("class", "progress-bar");
           progressBar.innerHTML = '<progress class="progress is-danger" value="' + data.percentage + '" max="100">' + data.percentage + '%</progress>';
           $(actorName).after(progressBar);
           $("#matches").text("Your Best Match!")
           $("#max").addClass("best-match");
-          var maxHistory = localStorage.getItem("maxComp");
-          var match = JSON.parse(maxHistory).actor;
-          var matchPercent = JSON.parse(maxHistory).percentage;
-          $("#history").text(match + ' with ' +matchPercent + '% love compatability!');
+          $("#history").text(match + ' with ' + matchPercent + '% love compatability!');
           $("#love-btn").hide();
-          
         };
       }
     })
@@ -72,36 +69,36 @@ function getCompatibility(fname, sname) {
 
 //OMDB API Code (Bryan)
 
-function showError () {
-  $("#error-msg").removeAttr("hidden"); 
+// Shows the error message box when called
+function showError() {
+  $("#error-msg").removeAttr("hidden");
 }
 
 $("#close-btn").on("click", function () {
   $("#error-msg").hide();
 })
 
-var submitButton = document.getElementById("get-movie");
-
+//Get Movie when called 
 function getMovie() {
 
   //Get form data and store username in local sorage
   var movieName = document.getElementById("movie-input").value;
   var movieYear = document.getElementById("year-input").value;
   var userName = document.getElementById("name-input").value;
+  var requestURL = "https://www.omdbapi.com/?apikey=716bc5f5&t=" + movieName + "&y=" + movieYear
 
+  //store max compatibilty 
+  var maxComp = JSON.parse(localStorage.getItem("maxComp"))
 
   //Validate form is not empty
-  if (movieName === "" || userName === "" ) {
+  if (movieName === "" || userName === "") {
     $("#error-msg").show()
     showError();
     return
   }
 
-  //store max compatibilty 
-  var maxComp = JSON.parse(localStorage.getItem("maxComp"))
-
-  //need to check maxComp local storage to initialize and reset
-  //if a different person's name is entered
+  //Need to check maxComp local storage to initialize and reset
+  //if a different person's name is entered (Albert)
   if (maxComp.myName == "") {
     maxComp.myName = userName;
     localStorage.setItem("maxComp", JSON.stringify(maxComp));
@@ -115,12 +112,11 @@ function getMovie() {
 
   localStorage.setItem("myName", userName);
 
-  //begin API call
-  var requestURL = "https://www.omdbapi.com/?apikey=716bc5f5&t=" + movieName + "&y=" + movieYear
 
   //Changes the DOM to render results
   switchToResults();
 
+  //begin API call
   fetch(requestURL)
     .then(function (response) {
       return response.json();
@@ -128,7 +124,7 @@ function getMovie() {
     .then(function (data) {
       console.log(data)
 
-      if(data.Response =="False") {
+      if (data.Response == "False") {
         $("#error-msg").show()
         return
       }
@@ -154,6 +150,7 @@ submitButton.addEventListener("click", getMovie)
 // END OMDB API Code (Bryan)
 
 // BEGIN Albert switchToResults Code
+//This function switches the result from the initial input screen to the results screen
 function switchToResults() {
   var resultContainerText = '<nav class="navbar" role="navigation" aria-label="main navigation">\
   <div class="navbar-brand">\
@@ -207,6 +204,7 @@ function switchToResults() {
   $(".index-container").remove();
   $(document.body).append(resultContainerText);
 
+  //When the Get Compatibility button is clicked
   $("#love-btn").on("click", function () {
     var actorArray = localStorage.getItem("actors").split(",");
     var myName = localStorage.getItem("myName");
