@@ -9,6 +9,7 @@ Using the fetch statement we have created a responsive application that allows u
 For our front end CSS purposes since we used an alternative that is Bulma a free open source and modern CSS framework. 
 
 ## Features
+The app saves user name's best match across all movie searches for the given input name. 
 
 ### Inputs
 
@@ -24,6 +25,7 @@ The user inputs the following:
 
 ![Diplay Screenshot with button](./images/output1.png)
 ![Diplay Screenshot w/o button](./images/output2.png)
+![Diplay Screenshot w/o button](./images/output3.png)
 
 The application will diplay: 
 *  Information of the movie, including poster, description, and actors 
@@ -33,7 +35,7 @@ The application will diplay:
     *  It will hide the Get Compatibiity button so that the user must push reset for a new search 
 
 ### Link to the application 
-https://alzcheng.github.io/project1/
+https://kieranbrobst.github.io/project1/
 
 
 
