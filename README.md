@@ -35,8 +35,4 @@ The application will diplay:
     *  It will hide the Get Compatibiity button so that the user must push reset for a new search 
 
 ### Link to the application 
-https://kieranbrobst.github.io/project1/
-
-
-
-
+https://alzcheng.github.io/project1/
