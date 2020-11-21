@@ -2,10 +2,10 @@
 
 ## Team Members
 
-* Kieran Brobst
-* Albert Cheng
-* Bryan Smith
-* Bazine Solomon
+* [Kieran Brobst](https://github.com/kieranbrobst)
+* [Albert Cheng](https://github.com/alzcheng)
+* [Bryan Smith](https://github.com/bryansmithsf)
+* [Bazine Solomon](https://github.com/bazine356)
 
 ## Overview
 
