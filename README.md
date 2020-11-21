@@ -1,5 +1,12 @@
 # Welcome to the Algo-Rythms "Movie Love Calculator Readme."
 
+## Team Members
+
+* Kieran Brobst
+* Albert Cheng
+* Bryan Smith
+* Bazine Solomon
+
 ## Overview
 
 We used the [OMDb API](http://www.omdbapi.com/) to do a relative movie search on any of your favorite movies througout the years and which one of the actors your likely get to go on a hot date with.  We then use the [Love Calculator API](https://rapidapi.com/ajith/api/love-calculator) to get your compatibility with all of those actors/actresses. 
